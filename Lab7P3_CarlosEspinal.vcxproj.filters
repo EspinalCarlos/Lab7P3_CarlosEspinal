@@ -19,4 +19,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Producto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resena.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pelicula.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Disco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

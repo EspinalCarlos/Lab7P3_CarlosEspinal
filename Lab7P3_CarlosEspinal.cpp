@@ -1,20 +1,44 @@
-// Lab7P3_CarlosEspinal.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include <vector>
+#include "Producto.h"
+#include "Libro.h"
+#include "Resena.h"
+#include "Pelicula.h"
+#include "Disco.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+
+void mainmenu() {
+    cout << "---- Menu Principal ----\n\n" << "1. Agregar nuevo producto \n" << "2. Modificar Stock \n" << "3. Listar productos disponibles \n" << "4. Agregar resena \n" << "5. Ver resenas de producto \n" << "0. Salida \n\n" << "Ingrese la opcion que desea acceder: ";
+}
+void menu2() {
+    cout << "---- Tipos de Producto ---- \n" << "1. Libro\n" <<"2. Pelicula\n"<<"3. Disco\n\n"<< "Ingrese el tipo que quiere agregar: ";
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+int main(){
+    int opcion;
+    do {
+        mainmenu();
+        cin >> opcion;
+        cout << endl << endl;
+
+        switch (opcion) {
+            case 1:
+                
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            
+        }
+
+    } while (opcion != 0);
+}

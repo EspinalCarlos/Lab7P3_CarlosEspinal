@@ -3,17 +3,26 @@
 #include <string>
 template <typename T>
 class Resena{
-	Producto producto;
+	Producto<T> producto;
 	string comentario;
 	int calificacion;
 public:
-	Resena<T>::Resena(Producto product, string comment, int calif) {
+	Resena(Producto<T> product, string comment, int calif) {
 		producto = product;
 		comentario = comment;
 		calificacion = calif;
 	}
-	Resena<T>::getProducto() {
+	Producto<T> getProducto() {
 		return producto;
+	}
+	string getComentario() {
+		return comentario;
+	}
+	int getCalificacion() {
+		return calificacion;
+	}
+	void toString() {
+		cout << "Producto: \n" << "Comentario: " << comentario << endl << "Calificacion: " << calificacion;
 	}
 
 };
