@@ -17,6 +17,12 @@ public:
 	int getPrecio() {
 		return precio;
 	}
+	int getID() {
+		return id;
+	}
+	int getStock() {
+		return stock;
+	}
 	void setStock(int cant) {
 		stock = cant;
 	}
