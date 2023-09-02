@@ -43,33 +43,16 @@ void imprimirid2(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> di
         cout << endl;
     }
 }
-Pelicula* recorrerlistaP(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics,int aidee) {
-    Pelicula* movie = nullptr;
-    for (Pelicula* peli : pelis) {
+template<typename T>
+T recorrerlista(vector<T> pelis, int aidee) {
+    T movie = nullptr;
+    for (T peli : pelis) {
         if (peli->getID() == aidee) {
             movie = peli; 
         }
     }
     
     return movie;
-}
-Libro* recorrerlistaL(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics,int aidee) {
-    Libro* book = nullptr;
-    for (Libro* lib : libs) {
-        if (lib->getID() == aidee) {
-            book = lib;
-        }
-    }
-    return book;
-}
-Disco* recorrerlistaD(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics, int aidee) {
-    Disco* disk = nullptr;
-    for (Disco* dis:dics) {
-        if (dis->getID() == aidee) {
-            disk = dis;
-        }
-    }
-    return disk;
 }
 template<typename T>
 void imprimirresenas2(vector<Resena<T>*> rl) {
@@ -83,6 +66,12 @@ void buscar(vector<Resena<T>*> vr,int idquebusca) {
         if ((r->getProducto())->getID() == idquebusca) {
             cout << "\n---------\n" << "Calificacion: " << r->getCalificacion() << endl << "Comentario: " << r->getComentario() << "\n---------\n";
         }
+    }
+}
+template<typename T>
+void freeMemory(vector<T> vec) {
+    for (T t : vec) {
+        delete t;
     }
 }
 
@@ -99,7 +88,7 @@ int main(){
         mainmenu();
         cin >> opcion;
         cout << endl << endl;
-        int opcionadd, idP,stockP,intP,idbuscar,calific;
+        int opcionadd, idP,stockP,intP,idbuscar,calific,newstock;
         float precioP;
         string tituloP,artautdirec,coment;
         Pelicula* mov = nullptr;
@@ -176,7 +165,31 @@ int main(){
                 break;
             case 2://modificar stock por id
                 cout << "\n---- Productos Disponibles ----\n";
-                imprimirid2
+                imprimirid2(peliculas, libros, discos);
+                cout << endl;
+                cout << "Ingrese la id del producto a cambiar: ";
+                cin >> idbuscar;
+                bok = recorrerlista<Libro*>(libros, idbuscar);
+                mov = recorrerlista<Pelicula*>(peliculas, idbuscar);
+                dic = recorrerlista<Disco*>(discos, idbuscar);
+
+                if (bok != nullptr) {
+                    cout << "Ingrese el nuevo stock: ";
+                    cin >> newstock;
+                    bok->setStock(newstock);
+
+                }
+                else if (mov != nullptr) {
+                    cout << "Ingrese el nuevo stock: ";
+                    cin >> newstock;
+                    mov->setStock(newstock);
+                }
+                else if (dic != nullptr) {
+                    cout << "Ingrese el nuevo stock: ";
+                    cin >> newstock;
+                    dic->setStock(newstock);
+                }
+
 
                 break;
             case 3://Listar productos disponibles
@@ -194,9 +207,10 @@ int main(){
                 imprimirid2(peliculas, libros, discos);
                 cout << "Ingrese la id del producto que desea agregar una resena: ";
                 cin >> idbuscar;
-                bok = recorrerlistaL(peliculas, libros, discos, idbuscar);
-                mov = recorrerlistaP(peliculas, libros, discos, idbuscar);
-                dic = recorrerlistaD(peliculas, libros, discos, idbuscar);
+                bok = recorrerlista<Libro*>(libros, idbuscar);
+                mov = recorrerlista<Pelicula*>(peliculas, idbuscar);
+                dic = recorrerlista<Disco*>(discos, idbuscar);
+                
 
                 if (bok != nullptr) {
                     cout << "Ingrese la calificacion: ";
@@ -250,4 +264,14 @@ int main(){
         }
 
     } while (opcion != 0);
+    //liberacion de memoria
+    freeMemory<Pelicula*>(peliculas);
+    freeMemory<Libro*>(libros);
+    freeMemory<Disco*>(discos);
+    freeMemory<Resena<Libro*>*>(resenalibros);
+    freeMemory<Resena<Pelicula*>*>(resenapeliculas);
+    freeMemory<Resena<Disco*>*>(resenadiscos);
+
+
+
 }
