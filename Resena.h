@@ -1,20 +1,26 @@
 #pragma once
 #include <iostream>
 #include <string>
+using namespace std;
 template <typename T>
 class Resena{
-	Producto<T> producto;
+	T temp;
 	string comentario;
 	int calificacion;
 public:
-	Resena(Producto<T> product, string comment, int calif) {
-		producto = product;
+	Resena() {}
+	Resena(string comment, int calif) {
 		comentario = comment;
 		calificacion = calif;
 	}
-	Producto<T> getProducto() {
-		return producto;
+	T getProducto() {
+		return temp;
 	}
+
+	void setProducto(T t) {
+		temp = t;
+	}
+	
 	string getComentario() {
 		return comentario;
 	}

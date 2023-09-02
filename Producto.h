@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include<string>
 template <typename T>
 class Producto{

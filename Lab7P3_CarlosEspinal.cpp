@@ -15,7 +15,6 @@ void mainmenu() {
 void menu2() {
     cout << "---- Tipos de Producto ---- \n" << "1. Libro\n" <<"2. Pelicula\n"<<"3. Disco\n\n"<< "Ingrese el tipo que quiere agregar: ";
 }
-
 void imprimirids(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics) {
     for (Pelicula* peli : pelis) {
         cout << " - " << peli->getID() << " - " << peli->getTitulo() << " - " << peli->getDirector() << " - " << "stock: " << peli->getStock();
@@ -44,16 +43,38 @@ void imprimirid2(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> di
         cout << endl;
     }
 }
-
-Pelicula* recorrerlistas(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics,int aidee) {
+Pelicula* recorrerlistaP(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics,int aidee) {
     Pelicula* movie = nullptr;
     for (Pelicula* peli : pelis) {
         if (peli->getID() == aidee) {
-            movie = peli;
+            movie = peli; 
         }
     }
     
-
+    return movie;
+}
+Libro* recorrerlistaL(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics,int aidee) {
+    Libro* book = nullptr;
+    for (Libro* lib : libs) {
+        if (lib->getID() == aidee) {
+            book = lib;
+        }
+    }
+    return book;
+}
+Disco* recorrerlistaD(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco*> dics, int aidee) {
+    Disco* disk = nullptr;
+    for (Disco* dis:dics) {
+        if (dis->getID() == aidee) {
+            disk = dis;
+        }
+    }
+    return disk;
+}
+void imprimirresenas(vector<Resena<Libro*>*> rl, vector<Resena<Pelicula*>*> rp, vector<Resena<Disco*>*> rd) {
+    for (Resena<Libro*>* reseL : rl) {
+        cout << (reseL->getProducto())->getID();
+    }
 }
 
 int main(){
@@ -61,14 +82,21 @@ int main(){
     vector<Pelicula*> peliculas;
     vector<Libro*> libros;
     vector<Disco*> discos;
+    vector<Resena<Libro*>*> resenalibros; 
+    vector<Resena<Pelicula*>*> resenapeliculas;
+    vector<Resena<Disco*>*> resenadiscos;
     
     do {
         mainmenu();
         cin >> opcion;
         cout << endl << endl;
-        int opcionadd, idP,stockP,intP,idbuscar;
+        int opcionadd, idP,stockP,intP,idbuscar,calific;
         float precioP;
-        string tituloP,artautdirec;
+        string tituloP,artautdirec,coment;
+        Pelicula* mov = nullptr;
+        Libro* bok = nullptr;
+        Disco* dic = nullptr;
+
 
         switch (opcion) {
             case 1: // agregar producto
@@ -155,7 +183,36 @@ int main(){
                 imprimirid2(peliculas, libros, discos);
                 cout << "Ingrese la id del producto que desea agregar una resena: ";
                 cin >> idbuscar;
+                bok = recorrerlistaL(peliculas, libros, discos, idbuscar);
+                mov = recorrerlistaP(peliculas, libros, discos, idbuscar);
+                dic = recorrerlistaD(peliculas, libros, discos, idbuscar);
 
+                if (bok != nullptr) {
+                    cout << "Ingrese la calificacion: ";
+                    cin >> calific;
+                    cout << "Ingrese un comentario: ";
+                    cin.ignore();
+                    getline(cin, coment);
+                    Resena<Libro*>* resL = new Resena<Libro*>(coment, calific);
+                    resL->setProducto(bok);
+
+
+                    
+                }
+                else if (mov != nullptr) {
+
+                }
+                else if (dic != nullptr) {
+
+                }
+
+
+                break;
+            case 5:
+                cout << "\n---- Productos ----\n";
+                imprimirresenas(resenalibros, resenapeliculas, resenadiscos);
+                cout << "Ingrese la id del producto que desea analizar: ";
+                cin >> idbuscar;
 
                 break;
             
