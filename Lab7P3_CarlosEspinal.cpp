@@ -71,9 +71,18 @@ Disco* recorrerlistaD(vector<Pelicula*> pelis, vector<Libro*> libs, vector<Disco
     }
     return disk;
 }
-void imprimirresenas(vector<Resena<Libro*>*> rl, vector<Resena<Pelicula*>*> rp, vector<Resena<Disco*>*> rd) {
-    for (Resena<Libro*>* reseL : rl) {
-        cout << (reseL->getProducto())->getID();
+template<typename T>
+void imprimirresenas2(vector<Resena<T>*> rl) {
+    for (Resena<T>* reseL : rl) {
+        cout << " - " << (reseL->getProducto())->getID() << " - "; 
+    }
+}
+template<typename T>
+void buscar(vector<Resena<T>*> vr,int idquebusca) {
+    for (Resena<T>* r : vr) {
+        if ((r->getProducto())->getID() == idquebusca) {
+            cout << "\n---------\n" << "Calificacion: " << r->getCalificacion() << endl << "Comentario: " << r->getComentario() << "\n---------\n";
+        }
     }
 }
 
@@ -166,6 +175,8 @@ int main(){
                 }
                 break;
             case 2://modificar stock por id
+                cout << "\n---- Productos Disponibles ----\n";
+                imprimirid2
 
                 break;
             case 3://Listar productos disponibles
@@ -195,24 +206,44 @@ int main(){
                     getline(cin, coment);
                     Resena<Libro*>* resL = new Resena<Libro*>(coment, calific);
                     resL->setProducto(bok);
-
+                    resenalibros.push_back(resL);
 
                     
                 }
                 else if (mov != nullptr) {
-
+                    cout << "Ingrese la calificacion: ";
+                    cin >> calific;
+                    cout << "Ingrese un comentario: ";
+                    cin.ignore();
+                    getline(cin, coment);
+                    Resena<Pelicula*>* resL = new Resena<Pelicula*>(coment, calific);
+                    resL->setProducto(mov);
+                    resenapeliculas.push_back(resL);
                 }
                 else if (dic != nullptr) {
-
+                    cout << "Ingrese la calificacion: ";
+                    cin >> calific;
+                    cout << "Ingrese un comentario: ";
+                    cin.ignore();
+                    getline(cin, coment);
+                    Resena<Disco*>* resL = new Resena<Disco*>(coment, calific);
+                    resL->setProducto(dic);
+                    resenadiscos.push_back(resL);
                 }
 
 
                 break;
             case 5:
                 cout << "\n---- Productos ----\n";
-                imprimirresenas(resenalibros, resenapeliculas, resenadiscos);
+                imprimirresenas2<Libro*>(resenalibros);
+                imprimirresenas2<Pelicula*>(resenapeliculas);
+                imprimirresenas2<Disco*>(resenadiscos);
+                cout << endl;
                 cout << "Ingrese la id del producto que desea analizar: ";
                 cin >> idbuscar;
+                buscar<Libro*>(resenalibros, idbuscar);
+                buscar<Pelicula*>(resenapeliculas, idbuscar);
+                buscar<Disco*>(resenadiscos, idbuscar);
 
                 break;
             

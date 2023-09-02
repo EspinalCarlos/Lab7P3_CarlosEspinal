@@ -28,7 +28,7 @@ public:
 		return calificacion;
 	}
 	void toString() {
-		cout << "Producto: \n" << "Comentario: " << comentario << endl << "Calificacion: " << calificacion;
+		cout <<"Comentario: " << comentario << endl << "Calificacion: " << calificacion;
 	}
 
 };
